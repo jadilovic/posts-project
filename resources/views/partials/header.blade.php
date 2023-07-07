@@ -21,7 +21,7 @@
           <a class="nav-link" href={{ route('jobs.filter', ['category' => 1]) }}>Jobs Filter</a>
         </li> --}}
       </ul>
-           <div class="d-flex">
+      <div class="d-flex">
         <!-- Authentication -->
         <?php
           function isLoggedIn() {
