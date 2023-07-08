@@ -1,4 +1,14 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
+   <!-- Authentication -->
+    <?php
+      function isLoggedIn() {
+        try {
+          return Auth::check();
+        } catch (\Throwable $th) {
+          return false;
+        }
+      }
+    ?>
   <div class="container">
     <a class="navbar-brand" href={{ route('home') }}>Oglasi Aplikacija</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,9 +18,11 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href={{ route('dashboard') }}>Dashboard</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href={{ route('dashboard') }}>Blogovi Kartice</a>
-        </li>
+        @if (isLoggedIn())
+          <li class="nav-item">
+            <a class="nav-link" href={{ route('myPosts') }}>Moji oglasi</a>
+          </li>
+        @endif
         {{-- <li class="nav-item">
           <a class="nav-link" href={{ route('blogs') }}>Blogovi Kartice</a>
         </li>
@@ -25,16 +37,6 @@
         </li> --}}
       </ul>
       <div class="d-flex">
-        <!-- Authentication -->
-        <?php
-          function isLoggedIn() {
-            try {
-              return Auth::check();
-            } catch (\Throwable $th) {
-              return false;
-            }
-          }
-        ?>
         @if (isLoggedIn())
             <form method="POST" action="{{ route('logout') }}">
               @csrf
