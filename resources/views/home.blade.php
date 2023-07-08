@@ -28,6 +28,27 @@
           </div>
         </div>
       @endforeach
+      @foreach ($posts as $post)
+        <div class="col-md-4">
+          <div class="card">
+            @if ($post->slika)
+              <img src="{{asset('storage/slike/' . $post->slika)}}" class="card-img-top" alt="{{$post->naslov}}" >
+            @endif
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Cijena: </li>
+              <li class="list-group-item">Kontakt: </li>
+            </ul>
+            <div class="card-body" style="display: flex; justify-content:space-between">
+              <a href="#" class="btn btn-primary">Pogledaj detaljno</a>
+              <a href="#" class="btn btn-secondary">Dodaj u favorite</a>
+            </div>
+          </div>
+        </div>
+      @endforeach
     </div>
   </div>
 @endsection

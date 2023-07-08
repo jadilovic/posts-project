@@ -8,6 +8,9 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href={{ route('dashboard') }}>Dashboard</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href={{ route('dashboard') }}>Blogovi Kartice</a>
+        </li>
         {{-- <li class="nav-item">
           <a class="nav-link" href={{ route('blogs') }}>Blogovi Kartice</a>
         </li>
