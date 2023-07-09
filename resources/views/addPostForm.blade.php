@@ -1,8 +1,8 @@
 @extends('layouts.layout')
 
-{{-- @section('navigation')
+@section('navigation')
   @include('partials.header')
-@endsection --}}
+@endsection
 
 @section('content')
   <div class="container">

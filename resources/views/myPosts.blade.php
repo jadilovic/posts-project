@@ -28,7 +28,7 @@
         <div class="col-md-4">
           <div class="card">
             @if ($post->slika)
-              <img src="{{asset('storage/slike/' . $post->slika)}}" class="card-img-top" alt="{{$post->naslov}}" >
+              <img src="{{asset('storage/slike/' . $post->slika)}}" class="card-img-top" alt="{{$post->slika}}" >
             @endif
             <div class="card-body">
               <h5 class="card-title">{{$post->naslov}}</h5>
@@ -39,11 +39,16 @@
               <li class="list-group-item"><b>Cijena:</b> {{$post->cijena}}KM</li>
               <li class="list-group-item"><b>Objavio:</b> {{$post->user->name}}</li>
               <li class="list-group-item"><b>Kontakt:</b> {{$post->kontakt}}</li>
+              <li class="list-group-item"><b>Status: </b><b style="color: {{$post->status ? 'green' : 'red'}}" >{{$post->status ? 'Aktivan' : 'Neaktivan'}}</b></li>
             </ul>
               {{-- <a href="{{route('posts.show', ['post' => $post->id])}}" class="btn btn-primary">Detalji</a> --}}
             <div class="card-body" style="display: flex; justify-content:space-between">
-              <a href="#" class="btn btn-primary">Pogledaj detaljno</a>
-              <a href="#" class="btn btn-secondary">Dodaj u favorite</a>
+              <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary">Uredi Oglas</a>
+              <form style="display: inline;" action="{{ route('posts.delete', $post->id) }}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" class="btn btn-sm btn-danger">Obrisi</button>
+                </form>
             </div>
           </div>
         </div>
