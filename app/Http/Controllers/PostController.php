@@ -6,13 +6,17 @@ use App\Models\Post;
 use App\Models\PostCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PhpParser\Node\Stmt\TryCatch;
 
 class PostController extends Controller
 {
     public function index() {
-        $posts = Post::all();
-        return view('home', ['posts' => $posts]);
+        return view('home');
+    }
+
+    public function getAllPosts($categoryId) {
+        $posts = $categoryId == 0 ? Post::whereStatus(1)->get() : Post::where('category_id', $categoryId)->where('status', 1)->get();
+        $categories = PostCategory::all();
+        return view('posts', compact('posts', 'categories'));
     }
 
     public function getMyPosts() {
@@ -95,6 +99,10 @@ class PostController extends Controller
         } catch (\Throwable $th) {
             return redirect()->route('posts.edit')->with('error', 'Oglas nije uspjesno uredjen');
         }
+    }
+
+    public function show(Post $post) {
+        return view('postDetails', compact('post'));
     }
 
     public function destroy($id) {
