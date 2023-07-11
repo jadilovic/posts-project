@@ -25,6 +25,9 @@
           <li class="nav-item">
             <a class="nav-link" href={{ route('myPosts') }}>Moji oglasi</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href={{ route('myFavorites') }}>Moji favoriti</a>
+          </li>
         @endif
         {{-- <li class="nav-item">
           <a class="nav-link" href={{ route('blogs') }}>Blogovi Kartice</a>

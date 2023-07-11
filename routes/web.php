@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Favorite;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +37,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
     Route::put('/posts/{id}', [PostController::class, 'update'])->name('posts.update');
     Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.delete');
+
+    Route::post('/favorites', [FavoritesController::class, 'store'])->name('favorites');
+    Route::get('/my-favorites', [FavoritesController::class, 'index'])->name('myFavorites');
+    Route::delete('/favorites/{postId}', [FavoritesController::class, 'destroy'])->name('favorite.delete');
 });
 
 require __DIR__.'/auth.php';
