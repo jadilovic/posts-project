@@ -9,6 +9,17 @@
 @section('content')
   <div class="container">
     <h1 class="text-center m-5" >Moji favoriti</h1>
+    @if (session('success'))
+      <div class="alert alert-success">
+        {{session('success')}}
+      </div>
+    @endif
+
+    @if (session('error'))
+      <div class="alert alert-danger">
+        {{session('error')}}
+      </div>
+    @endif
     <div class="row row-gap-3">
       @if (sizeof($favoritePosts) < 1)
           <h3 class="text-center m-5">Nema dodanih favorit oglasa</h3>
@@ -31,20 +42,11 @@
               </ul>
               <div class="card-body" style="display: flex; justify-content:space-between">
                 <a href="{{route('posts.show', ['post' => $post->id])}}" class="btn btn-primary">Pogledaj Detaljno</a>
-                {{-- <a href="#" class="btn btn-secondary">Dodaj u favorite</a> --}}
-                @if (Favorite::where('user_id', Auth::id())->where('post_id', $post->id)->get())
-                  <form style="display: inline;" action="{{ route('favorite.delete', $post->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-warning">Izbrisi favorite</button>
-                  </form>
-                @else
-                  <form style="display: inline;" action="{{ route('favorites')}}" method="POST">
-                    @csrf
-                    <input type="hidden" name="post_id" value="{{$post->id}}">
-                    <button type="submit" class="btn btn-success">Dodaj u favorite</button>
-                  </form>
-                @endif
+                <form style="display: inline;" action="{{ route('favorite.delete', $post->id) }}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" class="btn btn-danger">Izbrisi favorite</button>
+                </form>
               </div>
             </div>
           </div>

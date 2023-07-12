@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\FavoritesController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PostController::class, 'index'])->name('home');
 Route::get('/all-posts/{categoryId}', [PostController::class, 'getAllPosts'])->name('posts');
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -33,7 +35,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/add-post', [PostController::class, 'createPost'])->name('addPostForm');
     Route::post('/posts', [PostController::class, 'store'])->name('store');
 
-    Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
     Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
     Route::put('/posts/{id}', [PostController::class, 'update'])->name('posts.update');
     Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.delete');
@@ -41,6 +42,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/favorites', [FavoritesController::class, 'store'])->name('favorites');
     Route::get('/my-favorites', [FavoritesController::class, 'index'])->name('myFavorites');
     Route::delete('/favorites/{postId}', [FavoritesController::class, 'destroy'])->name('favorite.delete');
+
+    Route::get('/start-chat/{userId}', [ChatController::class, 'createChat'])->name('startChatForm');
+    Route::post('/messages', [ChatController::class, 'store'])->name('message.store');
+    Route::get('/chat/{chatId}', [ChatController::class, 'openChat'])->name('chatForm');
 });
 
 require __DIR__.'/auth.php';

@@ -39,9 +39,12 @@ class FavoritesController extends Controller
     }
 
     public function destroy($postId) {
-        $favorite = Favorite::where('user_id', Auth::id())->where('post_id', $postId)->get();
-        $favorite[0]->delete();
-
-        return redirect()->route('myFavorites')->with('success', 'Uspjesno ste obrisali favorite!');
+        try {
+            $favorite = Favorite::where('user_id', Auth::id())->where('post_id', $postId)->get();
+            $favorite[0]->delete();
+            return redirect()->route('myFavorites')->with('success', 'Uspjesno ste obrisali favorite!');
+        } catch (\Throwable $th) {
+            return redirect()->route('myFavorites')->with('error', 'Favorite oglas nije obrisan!');
+        }
     }
 }

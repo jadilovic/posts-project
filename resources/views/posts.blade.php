@@ -10,16 +10,16 @@
   <div class="container">
     <h1 class="text-center m-5" >Pregled oglasa po kategorijama</h1>
     
-     @if (session('success'))
-        <div class="alert alert-success">
-          {{session('success')}}
-        </div>
+    @if (session('success'))
+      <div class="alert alert-success">
+        {{session('success')}}
+      </div>
     @endif
 
     @if (session('error'))
-        <div class="alert alert-danger">
-          {{session('error')}}
-        </div>
+      <div class="alert alert-danger">
+        {{session('error')}}
+      </div>
     @endif
 
     <div class="row m-5">
@@ -51,14 +51,13 @@
             </ul>
             <div class="card-body" style="display: flex; justify-content:space-between">
               <a href="{{route('posts.show', ['post' => $post->id])}}" class="btn btn-primary">Pogledaj Detaljno</a>
-              {{-- <a href="#" class="btn btn-secondary">Dodaj u favorite</a> --}}
                @if (Favorite::where('user_id', Auth::id())->where('post_id', $post->id)->get()->count() > 0)
-                    <h2>In favorites</h2>
+                  <a href={{ route('myFavorites') }} class="btn btn-success">Dodan u favorite</a>
                 @else
                   <form style="display: inline;" action="{{ route('favorites')}}" method="POST">
                     @csrf
                     <input type="hidden" name="post_id" value="{{$post->id}}">
-                    <button type="submit" class="btn btn-danger">Dodaj u favorite</button>
+                    <button type="submit" class="btn btn-warning">Dodaj u favorite</button>
                   </form>
                 @endif
             </div>
