@@ -28,21 +28,13 @@
           <li class="nav-item">
             <a class="nav-link" href={{ route('myFavorites') }}>Moji favoriti</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href={{ route('chats') }}>Poruke</a>
+          </li>
         @endif
-        {{-- <li class="nav-item">
-          <a class="nav-link" href={{ route('blogs') }}>Blogovi Kartice</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href={{ route('jobs') }}>Poslovi Kartice</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href={{ route('blogs.filter', ['category' => 1]) }}>Blogs Filter</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href={{ route('jobs.filter', ['category' => 1]) }}>Jobs Filter</a>
-        </li> --}}
       </ul>
-      <div class="d-flex">
+      <div style="align-items: center;" class="d-flex">
+        <p style="font-weight: 700; margin: 0; ">{{Auth::user() ? Auth::user()->name : 'Gost'}}</p>
         @if (isLoggedIn())
             <form method="POST" action="{{ route('logout') }}">
               @csrf

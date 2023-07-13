@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/start-chat/{userId}', [ChatController::class, 'createChat'])->name('startChatForm');
     Route::post('/messages', [ChatController::class, 'store'])->name('message.store');
     Route::get('/chat/{chatId}', [ChatController::class, 'openChat'])->name('chatForm');
+    Route::get('/chats', [ChatController::class, 'getMyChats'])->name('chats');
 });
 
 require __DIR__.'/auth.php';

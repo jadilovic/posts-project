@@ -6,12 +6,12 @@
 
 @section('content')
   <div class="container">
-    <h1 class="text-center m-5" >Poruke</h1>
+    <h1 class="text-center m-5" >Chat ID: {{$chat->id}}</h1>
     @if ($chat->messages->count() > 0)
-        <h3>Poruke:</h3>
         <ul class="list-group">
+          <h3>Korisnik: {{$userName2 === Auth::user()->name ? $userName1 : $userName2}}</h3>
           @foreach ($chat->messages as $message)
-              <li class="list-group-item">
+              <li style="{{Auth::id() === $message->user_id ? 'margin-left: 4em; background-color: lightgreen;' : ''}}" class="list-group-item">
                 <p>{{$message->content}}</p>
               </li>
           @endforeach
@@ -19,7 +19,7 @@
     @else
         <p>Trenutno nema poruka</p>
     @endif
-    <h3>Unesite poruku:</h3>
+    <h3 style="margin-top: 1em">Poruka</h3>
     <form action="{{route('message.store')}}" method="post">
       @csrf
       <input type="hidden" name="chat_id" value="{{$chat->id}}">
